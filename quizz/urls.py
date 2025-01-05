@@ -24,5 +24,5 @@ import os
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('', index, name='index'),  
+    path('', index, name='index'), 
 ]+ static(settings.STATIC_URL, document_root=os.path.join(settings.BASE_DIR, 'frontend'))

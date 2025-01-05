@@ -1,24 +1,40 @@
 from django.contrib import admin
 from .models import UserAnswer, Choice, Question
 
-
 @admin.register(UserAnswer)
 class UserAnswerAdmin(admin.ModelAdmin):
-    list_display = ('demo_user', 'question_text', 'selected_choice_text')
-    list_filter = ('demo_user', 'question')
-    readonly_fields = ('demo_user', 'question', 'selected_choice')
+    # Specify the columns to display
+    list_display = ('user_name_display', 'last_name_display', 'question_text_display', 'selected_choice_display')
+    
+    # Custom filters with localized names
+    list_filter = (
+        ('user_name', admin.AllValuesFieldListFilter),  # Custom filter for Vardas
+        ('last_name', admin.AllValuesFieldListFilter),  # Custom filter for Pavardė
+        ('question', admin.RelatedOnlyFieldListFilter),  # Custom filter for Klausimas
+        ('selected_choice', admin.RelatedOnlyFieldListFilter),  # Custom filter for Atsakymas
+    )
 
-    # Display the text of the question
-    def question_text(self, obj):
+    # Specify search fields
+    search_fields = ('user_name', 'last_name', 'question__question_text', 'selected_choice__choice_text')
+
+    # Custom column for user name (Vartotojas)
+    def user_name_display(self, obj):
+        return obj.user_name
+    user_name_display.short_description = 'Vartotojas'
+
+    # Custom column for last name (Pavardė)
+    def last_name_display(self, obj):
+        return obj.last_name
+    last_name_display.short_description = 'Pavardė'
+
+    # Custom column for question text (Klausimas)
+    def question_text_display(self, obj):
         return obj.question.question_text
+    question_text_display.short_description = 'Klausimas'
 
-    question_text.short_description = 'Question'
-
-    # Display the text of the selected choice
-    def selected_choice_text(self, obj):
+    # Custom column for selected choice (Atsakymas)
+    def selected_choice_display(self, obj):
         return obj.selected_choice.choice_text
-
-    selected_choice_text.short_description = 'Selected Choice'
-
+    selected_choice_display.short_description = 'Atsakymas'
 admin.site.register(Choice)
 admin.site.register(Question)

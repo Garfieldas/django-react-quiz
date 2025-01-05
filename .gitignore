@@ -1,0 +1,5 @@
+# Ignore the React folder
+react-quizz/
+
+# Ignore the Django settings file
+quizz/settings.py

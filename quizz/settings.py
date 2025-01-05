@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://127.0.0.1:8000"
 ]
 
 MIDDLEWARE = [
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'quizz.urls'
 import os
@@ -127,6 +130,13 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/assets'),
 ]
+
+JAZZMIN_SETTINGS = {
+    # Add your site logo
+    "site_logo": "unicorn-Dny5PZmZ.png",  # Path to your logo
+    "site_title": "Odos quiz",       # Custom admin title
+    "site_header": "Diktatorius",       # Header text
+}
 
 
 # Default primary key field type
