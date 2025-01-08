@@ -58,7 +58,8 @@ def submit_answers(request):
             'user_name': item.get('user_name', 'Unknown'),
             'last_name': item.get('last_name', 'Unknown'),
             'question': item['question'],
-            'selected_choice': item['selected_choice']
+            'selected_choice': item['selected_choice'],
+            'text_answer': item['text_answer']
         })
         
         # Validate and save each item

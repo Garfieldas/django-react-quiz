@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    question_status = models.BooleanField(default=False)
+    is_text_field = models.BooleanField(default=False)
     class Meta:
         verbose_name = "Klausimas"  # Singular name
         verbose_name_plural = "Klausimai"  # Plural name
@@ -26,7 +26,10 @@ class UserAnswer(models.Model):
     user_name = models.CharField(max_length=250, default='unknown')
     last_name = models.CharField(max_length=250, default='unknown')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    selected_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    selected_choice = models.ForeignKey(Choice, on_delete=models.CASCADE, null=True, blank=True)
+    text_answer = models.CharField(max_length=500, blank=True, null=True)
+
+
     class Meta:
         verbose_name = "Vartotojo atsakymas"  # Singular name
         verbose_name_plural = "Vartotoju atsakymai"  # Plural name
